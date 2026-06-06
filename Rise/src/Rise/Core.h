@@ -9,3 +9,5 @@
 #else
 	#error Rise only support Window! // Không phải Windows → báo lỗi
 #endif 
+
+#define BTT(x) (1 << x)

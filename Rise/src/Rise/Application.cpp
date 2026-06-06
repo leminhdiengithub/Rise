@@ -1,19 +1,21 @@
-#include "Application.h"
+﻿#include "Application.h"
+#include "Events/ApplicationEvent.h"
+#include "Rise/Log.h"
 
 namespace Rise
 {
-	Application::Application()
-	{
+    Application::Application() {}
+    Application::~Application() {}
 
-	}
+    void Application::Run()
+    {
+        WindowResizeEvent e(1920, 1080);
 
-	Application::~Application()
-	{
+        if (e.IsInCategory(EventCategoryApplication))
+        {
+            RS_CORE_TRACE(e.ToString());
+        }
 
-	}
-
-	void Application::Run()
-	{
-
-	}
+        while (true);
+    }
 }
