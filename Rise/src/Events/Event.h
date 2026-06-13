@@ -1,11 +1,7 @@
 #pragma once
 
 #include "Rise/Core.h"
-
-#include <iostream> 
-#include <string>
-#include<functional>
-
+#include "rscph.h"
 namespace Rise
 {
 	/* Cac su kien trong Rise hien dang bi chan, nghia la khi mot su kien xay ra

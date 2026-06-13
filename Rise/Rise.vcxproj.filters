@@ -34,6 +34,7 @@
     <ClInclude Include="src\Rise\Log.h">
       <Filter>Rise</Filter>
     </ClInclude>
+    <ClInclude Include="src\rscph.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Rise\Application.cpp">
@@ -42,5 +43,6 @@
     <ClCompile Include="src\Rise\Log.cpp">
       <Filter>Rise</Filter>
     </ClCompile>
+    <ClCompile Include="src\rscph.cpp" />
   </ItemGroup>
 </Project>

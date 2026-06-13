@@ -16,6 +16,9 @@ project "Rise"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+    pchheader "rscph.h"
+    pchsource "Rise/src/rscph.cpp"
+
     files
     {
         "%{prj.name}/src/**.h",

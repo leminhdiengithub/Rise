@@ -1,4 +1,5 @@
-﻿#include "Application.h"
+﻿#include "rscph.h"
+#include "Application.h"
 #include "Events/ApplicationEvent.h"
 #include "Rise/Log.h"
 
