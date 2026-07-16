@@ -9,6 +9,12 @@ workspace "Rise"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir ["GLFW"] = "Rise/vendor/GLFW/include"
+
+include "Rise/vendor/GLFW"
+
 project "Rise"
     location "Rise"
     kind "SharedLib"
@@ -28,7 +34,15 @@ project "Rise"
     includedirs 
     {
         "%{prj.name}/src",
-        "%{prj.name}/vendor/spdlog/include"
+        "%{prj.name}/vendor/spdlog/include",
+        "%{IncludeDir.GLFW}"
+    }
+
+    links
+    {
+	    "GLFW",
+	    "opengl32.lib",
+	    "dwmapi.lib"
     }
 
     filter "system:windows"

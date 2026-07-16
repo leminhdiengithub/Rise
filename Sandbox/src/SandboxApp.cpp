@@ -1,4 +1,4 @@
-#include "Rise.h"
+#include "Rise/Rise.h"
 
 class Sandbox : public Rise::Application
 {

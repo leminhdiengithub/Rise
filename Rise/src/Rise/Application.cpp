@@ -5,18 +5,18 @@
 
 namespace Rise
 {
-    Application::Application() {}
+    Application::Application() 
+    {
+        m_Window = std::unique_ptr<Window>(Window::Create());
+    }
     Application::~Application() {}
 
     void Application::Run()
     {
-        WindowResizeEvent e(1920, 1080);
 
-        if (e.IsInCategory(EventCategoryApplication))
+        while (m_Running)
         {
-            RS_CORE_TRACE(e.ToString());
+            m_Window->OnUpdate();
         }
-
-        while (true);
     }
 }

@@ -12,10 +12,10 @@ namespace Rise {
 		static void Init();
 
 		inline static std::shared_ptr<spdlog::logger>& GetCoreLogger() { return s_CoreLogger; }
-		inline static std::shared_ptr<spdlog::logger>& GetCilentLogger() { return s_CilentLogger; }
+		inline static std::shared_ptr<spdlog::logger>& GetClientLogger() { return s_ClientLogger; }
 	private:
 		static std::shared_ptr<spdlog::logger> s_CoreLogger;
-		static std::shared_ptr<spdlog::logger> s_CilentLogger;
+		static std::shared_ptr<spdlog::logger> s_ClientLogger;
 	};
 }
 
@@ -28,8 +28,8 @@ namespace Rise {
 
 
 // Cilent log macros
-#define RS_WARN(...)         ::Rise::Log::GetCilentLogger()->warn(__VA_ARGS__)
-#define RS_INFO(...)         ::Rise::Log::GetCilentLogger()->info(__VA_ARGS__)
-#define RS_ERROR(...)        ::Rise::Log::GetCilentLogger()->error(__VA_ARGS__)
-#define RS_TRACE(...)        ::Rise::Log::GetCilentLogger()->trace(__VA_ARGS__)
-#define RS_FATAL(...)        ::Rise::Log::GetCilentLogger()->fatal(__VA_ARGS__)
+#define RS_WARN(...)         ::Rise::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define RS_INFO(...)         ::Rise::Log::GetClientLogger()->info(__VA_ARGS__)
+#define RS_ERROR(...)        ::Rise::Log::GetClientLogger()->error(__VA_ARGS__)
+#define RS_TRACE(...)        ::Rise::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define RS_FATAL(...)        ::Rise::Log::GetClientLogger()->fatal(__VA_ARGS__)
