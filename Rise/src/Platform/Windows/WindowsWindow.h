@@ -27,7 +27,7 @@ namespace Rise {
 		virtual void Init(const WindowProps& props);
 		virtual void Shutdown();
 	private:
-		GLFWwindow* m_Window;
+		GLFWwindow* m_Window = nullptr;
 
 		struct WindowData
 		{

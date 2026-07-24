@@ -159,4 +159,4 @@ namespace Rise {
 		EVENT_CLASS_TYPE(MouseButtonReleased)
 	};
 
-} // namespace Hazel
+} // namespace Rise
