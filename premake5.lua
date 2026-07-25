@@ -47,7 +47,7 @@ project "Rise"
 
     filter "system:windows"
         cppdialect "C++17"     
-        staticruntime "On"
+        staticruntime "Off"
         systemversion "latest"
         buildoptions { "/utf-8" }
 
@@ -64,14 +64,17 @@ project "Rise"
 
     filter "configurations:Debug"
         defines "RS_DEBUG"
+        buildoptions "/MDd"
         symbols "On"
 
     filter "configurations:Release"
-        defines "RS_RELEASE"    
+        defines "RS_RELEASE"
+        buildoptions "/MD"
         optimize "On"          
 
     filter "configurations:Dist"
         defines "RS_DIST"
+        buildoptions "/MD"
         optimize "On"         
 
 project "Sandbox"
@@ -100,7 +103,7 @@ project "Sandbox"
 
     filter "system:windows"
         cppdialect "C++17"     
-        staticruntime "On"
+        staticruntime "Off"
         systemversion "latest"
         buildoptions { "/utf-8" }
 
@@ -111,12 +114,15 @@ project "Sandbox"
 
     filter "configurations:Debug"
         defines "RS_DEBUG"
+        buildoptions "/MDd"
         symbols "On"
 
     filter "configurations:Release"
-        defines "RS_RELEASE" 
+        defines "RS_RELEASE"
+        buildoptions "/MD"
         optimize "On"
 
     filter "configurations:Dist"
         defines "RS_DIST"
+        buildoptions "/MD"
         optimize "On"

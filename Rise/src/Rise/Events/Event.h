@@ -1,7 +1,9 @@
-#pragma once
+﻿#pragma once
 
 #include "Rise/Core.h"
 #include "rscph.h"
+#include <spdlog/fmt/ostr.h>
+
 namespace Rise
 {
 	/* Cac su kien trong Rise hien dang bi chan, nghia la khi mot su kien xay ra
@@ -37,6 +39,10 @@ namespace Rise
 	{
 		friend class EventDispatcher;
 	public:
+		virtual ~Event() = default;
+
+		bool Handled = false;
+
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
 		virtual int GetCategoryFlags() const = 0;
@@ -46,26 +52,23 @@ namespace Rise
 		{
 			return GetCategoryFlags() & category;
 		}
-	protected:
-		bool m_Handled = false;
 	};
 
 	class EventDispatcher
 	{
-		template<typename T>
-		using EventFn = std::function<bool(T&)>;
 	public:
 		EventDispatcher(Event& event)
 			: m_Event(event)
 		{
 		}
 
-		template<typename T>
-		bool Dispatch(EventFn<T> func)
+		// F will be deduced by the compiler
+		template<typename T, typename F>
+		bool Dispatch(const F& func)
 		{
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
-				m_Event.m_Handled = func(*(T*)&m_Event);
+				m_Event.Handled |= func(static_cast<T&>(m_Event));
 				return true;
 			}
 			return false;
@@ -79,3 +82,4 @@ namespace Rise
 		return os << e.ToString();
 	}
 }
+template<> struct fmt::formatter<Rise::Event> : fmt::ostream_formatter {};

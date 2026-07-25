@@ -113,9 +113,9 @@ namespace Rise {
 				{
 					case GLFW_PRESS: 
 					{
-							MouseButtonPressedEvent event(button);
-							data.EventCallback(event);
-							break;
+						MouseButtonPressedEvent event(button);
+						data.EventCallback(event);
+						break;
 					}
 					case GLFW_RELEASE:
 					{

@@ -2,7 +2,7 @@
 
 #ifdef RS_PLATFORM_WINDOWS // Nếu đang chạy trên Windows
 	#ifdef RS_BUILD_DLL     // Nếu đang BUILD file DLL
-		#define RISE_API __declspec(dllexport)  // → Xuất ra
+		#define RISE_API __declspec(dllexport)  // → Xuất ra (chỉ sử dụng khi SandBox gọi)
 	#else 
 		#define RISE_API __declspec(dllimport)   // → Nhập vào
 	#endif
