@@ -6,4 +6,4 @@
 	url = https://github.com/leminhdiengithub/glfw.git
 [submodule "Rise/vendor/imgui"]
 	path = Rise/vendor/imgui
-	url = https://github.com/ocornut/imgui
+	url = https://github.com/leminhdiengithub/imgui.git
