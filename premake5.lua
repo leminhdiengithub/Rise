@@ -63,7 +63,8 @@ project "Rise"
         {
             "RS_PLATFORM_WINDOWS",
             "RS_BUILD_DLL",
-            "GLFW_INCLUDE_NONE"
+            "GLFW_INCLUDE_NONE",
+            "IMGUI_IMPL_OPENGL_LOADER_CUSTOM"
         }
 
         postbuildcommands
