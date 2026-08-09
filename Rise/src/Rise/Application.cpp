@@ -9,10 +9,16 @@ namespace Rise
 {
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this , std::placeholders::_1)
 
+    Application* Application::s_Instance = nullptr;
+
     Application::Application() 
     {
-        m_Window = std::unique_ptr<Window>(Window::Create()); /* Application (cấp cao) → phụ thuộc vào Window (abstraction)*/
+        RS_CORE_ASSERT(!s_Instance, "Application already exists!");
+        s_Instance = this;                              
+
+        m_Window = std::unique_ptr<Window>(Window::Create());
         m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+
     }
 
     Application::~Application() 
@@ -23,11 +29,13 @@ namespace Rise
     void Application::PushLayer(Layer* layer)
     {
         m_LayerStack.PushLayer(layer);
+        layer->OnAttach();
     }
 
     void Application::PushOverlay(Layer* layer)
     {
         m_LayerStack.PushOverlay(layer);
+        layer->OnAttach();
     }
 
     void Application::OnEvent(Event& e)
@@ -49,6 +57,7 @@ namespace Rise
 
         while (m_Running)
         {
+            RS_CORE_TRACE("Application::Run - loop tick");
             for (Layer* layer : m_LayerStack)
                 layer->OnUpdate();
 
@@ -58,6 +67,7 @@ namespace Rise
 
     bool Application::OnWindowClose(WindowCloseEvent& e)
     {
+        RS_CORE_WARN("OnWindowClose triggered!");
         m_Running = false;
 
         return true;

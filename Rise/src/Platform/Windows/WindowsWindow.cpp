@@ -26,7 +26,9 @@ namespace Rise {
 	}
 	
 	WindowsWindow::~WindowsWindow()
-	{ }
+	{ 
+		glfwDestroyWindow(m_Window);
+	}
 
 	void WindowsWindow::Init(const WindowProps& props)
 	{
