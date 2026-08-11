@@ -16,10 +16,10 @@ namespace Rise
 
 		int m_KeyCode;
 	};
-	class RISE_API KeyPressEvent : public KeyEvent
+	class RISE_API KeyPressedEvent : public KeyEvent
 	{
 	public:
-		KeyPressEvent(int keycode, int repeatCount)
+		KeyPressedEvent(int keycode, int repeatCount)
 			: KeyEvent(keycode), m_RepeatCount(repeatCount) {}
 
 		inline int GetRepeatCount() const { return m_RepeatCount; }
@@ -28,10 +28,10 @@ namespace Rise
 	private:
 		int m_RepeatCount;
 	};
-	class RISE_API KeyReleassedEvent : public KeyEvent
+	class RISE_API KeyReleasedEvent : public KeyEvent
 	{
 	public:
-		KeyReleassedEvent(int keycode)
+		KeyReleasedEvent(int keycode)
 			: KeyEvent(keycode) {}
 
 		std::string ToString() const override

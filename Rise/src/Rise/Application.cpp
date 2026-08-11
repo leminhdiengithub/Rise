@@ -57,6 +57,8 @@ namespace Rise
 
         while (m_Running)
         {
+            glClear(GL_COLOR_BUFFER_BIT);
+
             RS_CORE_TRACE("Application::Run - loop tick");
             for (Layer* layer : m_LayerStack)
                 layer->OnUpdate();

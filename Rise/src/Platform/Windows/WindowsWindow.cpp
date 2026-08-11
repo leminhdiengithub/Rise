@@ -92,19 +92,19 @@ namespace Rise {
 				{
 					case GLFW_PRESS:
 					{
-						KeyPressEvent event(key, 0);
+						KeyPressedEvent event(key, 0);
 						data.EventCallback(event);
 						break;
 					}
 					case GLFW_RELEASE:
 					{
-						KeyReleassedEvent event(key);
+						KeyReleasedEvent event(key);
 						data.EventCallback(event);
 						break;
 					}
 					case GLFW_REPEAT:
 					{
-						KeyPressEvent event(key, 1);
+						KeyPressedEvent event(key, 1);
 						data.EventCallback(event);
 						break;
 					}
@@ -126,7 +126,7 @@ namespace Rise {
 					case GLFW_RELEASE:
 					{
 
-						KeyReleassedEvent event(button);
+						MouseButtonReleasedEvent event(button);
 						data.EventCallback(event);
 						break;
 					}
