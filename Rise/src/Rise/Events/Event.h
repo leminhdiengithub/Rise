@@ -16,7 +16,7 @@ namespace Rise
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLost, WindowMoved,
 		AppTick, AppUpdate, AppRender,
-		KeyPressed, KeyRealeased,
+		KeyPressed, KeyRealeased, KeyTyped,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 

@@ -29,8 +29,7 @@ namespace Rise
 		bool OnMouseScrolledEvent(MouseScrolledEvent& e);
 		bool OnKeyPressdEvent(KeyPressedEvent& e);
 		bool OnKeyReleasedEvent(KeyReleasedEvent& e);
-		//bool OnKeyTypeEvent(OnKeyTypeEvent& e);
+		bool OnKeyTypeEvent(KeyTypedEvent& e);
 		bool OnWindowResizeEvent(WindowResizeEvent& e);
-
 	};
 }

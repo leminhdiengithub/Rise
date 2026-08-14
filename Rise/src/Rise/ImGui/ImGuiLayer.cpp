@@ -11,6 +11,8 @@
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
+extern ImGuiKey ImGui_ImplGlfw_KeyToImGuiKey(int keycode, int scancode);
+
 namespace Rise
 {
 	ImGuiLayer::ImGuiLayer()
@@ -71,7 +73,7 @@ namespace Rise
 		dispatcher.Dispatch<MouseMovedEvent>(RS_BIND_EVENT_FN(ImGuiLayer::OnMouseMoveEvent));
 		dispatcher.Dispatch<MouseScrolledEvent>(RS_BIND_EVENT_FN(ImGuiLayer::OnMouseScrolledEvent));
 		dispatcher.Dispatch<KeyPressedEvent>(RS_BIND_EVENT_FN(ImGuiLayer::OnKeyPressdEvent));
-		//dispatcher.Dispatch<OnKeyTypeEvent>(RS_BIND_EVENT_FN(ImGuiLayer::OnKeyTypeEvent));
+		dispatcher.Dispatch<KeyTypedEvent>(RS_BIND_EVENT_FN(ImGuiLayer::OnKeyTypeEvent));
 		dispatcher.Dispatch<KeyReleasedEvent>(RS_BIND_EVENT_FN(ImGuiLayer::OnKeyReleasedEvent));
 		dispatcher.Dispatch<WindowResizeEvent>(RS_BIND_EVENT_FN(ImGuiLayer::OnWindowResizeEvent));
 
@@ -108,11 +110,24 @@ namespace Rise
 
 	bool ImGuiLayer::OnKeyPressdEvent(KeyPressedEvent& e)
 	{
+		ImGuiIO& io = ImGui::GetIO();
+		ImGuiKey key = ImGui_ImplGlfw_KeyToImGuiKey(e.GetKeyCode(), 0);
+		io.AddKeyEvent(key, true); // True = Pressed 
 		return false;
 	}
 
-	bool ImGuiLayer::OnKeyReleasedEvent(KeyReleasedEvent& e) 
+	bool ImGuiLayer::OnKeyReleasedEvent(KeyReleasedEvent& e)
 	{
+		ImGuiIO& io = ImGui::GetIO();
+		ImGuiKey key = ImGui_ImplGlfw_KeyToImGuiKey(e.GetKeyCode(), 0);
+		io.AddKeyEvent(key, false);   // false = released 
+		return false;
+	}
+
+	bool ImGuiLayer::OnKeyTypeEvent(KeyTypedEvent& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		io.AddInputCharacter((unsigned int)e.GetKeyCode());
 		return false;
 	}
 
