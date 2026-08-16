@@ -10,6 +10,10 @@
 	#error Rise only support Window! // Không phải Windows → báo lỗi
 #endif
 
+#if RS_DEBUG
+	#define RS_ENABLE_ASSERTS
+#endif
+
 #ifdef RS_ENABLE_ASSERTS
 
 #define RS_ASSERT(x, ...) \
