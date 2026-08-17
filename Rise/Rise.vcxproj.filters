@@ -70,6 +70,8 @@
       <Filter>Rise</Filter>
     </ClInclude>
     <ClInclude Include="src\rscph.h" />
+    <ClInclude Include="src\Rise\Input.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
@@ -97,5 +99,6 @@
       <Filter>Rise</Filter>
     </ClCompile>
     <ClCompile Include="src\rscph.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
 </Project>
