@@ -45,7 +45,7 @@ namespace Rise
         EventDispatcher dispathcer(e);
         dispathcer.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 
-        RS_CORE_INFO( "{0}", e.ToString());
+        //RS_CORE_INFO( "{0}", e.ToString());
 
         for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
         {
@@ -61,12 +61,9 @@ namespace Rise
         {
             glClear(GL_COLOR_BUFFER_BIT);
 
-            RS_CORE_TRACE("Application::Run - loop tick");
             for (Layer* layer : m_LayerStack)
                 layer->OnUpdate();
 
-            auto [x, y] = Input::GetMousePosition();
-            RS_CORE_TRACE("{0}, {1}", x, y);
             m_Window->OnUpdate();
         }
     }

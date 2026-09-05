@@ -174,9 +174,11 @@
     <ClInclude Include="src\Rise\Events\MouseEvent.h" />
     <ClInclude Include="src\Rise\ImGui\ImGuiLayer.h" />
     <ClInclude Include="src\Rise\Input.h" />
+    <ClInclude Include="src\Rise\KeyCodes.h" />
     <ClInclude Include="src\Rise\Layer.h" />
     <ClInclude Include="src\Rise\LayerStack.h" />
     <ClInclude Include="src\Rise\Log.h" />
+    <ClInclude Include="src\Rise\MouseButtonCodes.h" />
     <ClInclude Include="src\Rise\Rise.h" />
     <ClInclude Include="src\Rise\Window.h" />
     <ClInclude Include="src\rscph.h" />

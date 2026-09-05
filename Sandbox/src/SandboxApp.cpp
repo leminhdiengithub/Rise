@@ -10,12 +10,17 @@ public:
 
     void OnUpdate() override
     {
-        RS_INFO("ExampleLayer::Update");
+        if (Rise::Input::IsKeyPressed(RS_KEY_TAB))
+            RS_TRACE("Tab key is Pressed !");
     }
 
     void OnEvent(Rise::Event& event) override
     {
-        RS_TRACE( "{0}", event);
+        if (event.GetEventType() == Rise::EventType::KeyPressed)
+        {
+            Rise::KeyPressedEvent& e = (Rise::KeyPressedEvent&)event;
+            RS_TRACE("{0}", (char)e.GetKeyCode());
+        }
     }
 };
 
