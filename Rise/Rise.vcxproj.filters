@@ -1382,6 +1382,9 @@
     <ClCompile Include="src\Rise\Application.cpp">
       <Filter>src\Rise</Filter>
     </ClCompile>
+    <ClCompile Include="src\Rise\ImGui\ImGuiBuild.cpp">
+      <Filter>src\Rise\ImGui</Filter>
+    </ClCompile>
     <ClCompile Include="src\Rise\ImGui\ImGuiLayer.cpp">
       <Filter>src\Rise\ImGui</Filter>
     </ClCompile>

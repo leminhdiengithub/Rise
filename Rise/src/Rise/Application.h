@@ -8,6 +8,8 @@
 #include "Events/ApplicationEvent.h"
 #include "Layer.h"
 
+#include "Rise/ImGui/ImGuiLayer.h"
+
 namespace Rise
 {
 	class  RISE_API Application
@@ -29,6 +31,7 @@ namespace Rise
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 

@@ -2,8 +2,8 @@
 #include "ImGuiLayer.h"
 
 #include "imgui.h"
-#include "Platform/OpenGL/ImGuiOpenGLRenderer.h"	
-#include "Platform/OpenGL/imgui_impl_glfw.h"	
+#include <backends/imgui_impl_glfw.h>
+#include <backends/imgui_impl_opengl3.h>
 
 #include "Rise/Application.h"
 
@@ -32,16 +32,15 @@ namespace Rise
 
 		ImGuiIO& io = ImGui::GetIO();
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
 		SetDarkThemeColors();
 
 		Application& app = Application::Get();
 		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
-
-		ImGui_ImplGlfw_InitForOpenGL(window, false);
-
+		ImGui_ImplGlfw_InitForOpenGL(window, true);
 		ImGui_ImplOpenGL3_Init("#version 410");
-
 	}
 
 	void ImGuiLayer::OnDetach()
@@ -51,92 +50,38 @@ namespace Rise
 		ImGui::DestroyContext();
 	}
 
-	void ImGuiLayer::OnUpdate()
+	void ImGuiLayer::Begin()
 	{
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
+		ImGui::DockSpaceOverViewport(); // tạo dockspace phủ toàn màn hình mỗi frame
+	}
+
+	void ImGuiLayer::End()
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		Application& app = Application::Get();
+		io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(), (float)app.GetWindow().GetHeight());
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			GLFWwindow* backup_current_context = glfwGetCurrentContext();
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
+			glfwMakeContextCurrent(backup_current_context);
+		}
 	}
 
-	void ImGuiLayer::OnEvent(Event& e)
+	void ImGuiLayer::OnImGuiRender()
 	{
-		EventDispatcher dispatcher(e);
+		static bool show = true;
 
-		dispatcher.Dispatch<MouseButtonPressedEvent>(RS_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonPressedEvent));
-		dispatcher.Dispatch<MouseButtonReleasedEvent>(RS_BIND_EVENT_FN(ImGuiLayer::OnMouseButtonReleasedEvent));
-		dispatcher.Dispatch<MouseMovedEvent>(RS_BIND_EVENT_FN(ImGuiLayer::OnMouseMoveEvent));
-		dispatcher.Dispatch<MouseScrolledEvent>(RS_BIND_EVENT_FN(ImGuiLayer::OnMouseScrolledEvent));
-		dispatcher.Dispatch<KeyPressedEvent>(RS_BIND_EVENT_FN(ImGuiLayer::OnKeyPressdEvent));
-		dispatcher.Dispatch<KeyTypedEvent>(RS_BIND_EVENT_FN(ImGuiLayer::OnKeyTypeEvent));
-		dispatcher.Dispatch<KeyReleasedEvent>(RS_BIND_EVENT_FN(ImGuiLayer::OnKeyReleasedEvent));
-		dispatcher.Dispatch<WindowResizeEvent>(RS_BIND_EVENT_FN(ImGuiLayer::OnWindowResizeEvent));
-
-	}
-
-	bool ImGuiLayer::OnMouseButtonPressedEvent(MouseButtonPressedEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		io.MouseDown[e.GetMouseButton()] = true;
-		return false;
-	}
-
-	bool ImGuiLayer::OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		io.MouseDown[e.GetMouseButton()] = false;
-		return false;
-	}
-
-
-	bool ImGuiLayer::OnMouseMoveEvent(MouseMovedEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		io.AddMousePosEvent(e.GetX(), e.GetY());
- 		return false;
-	}
-
-	bool ImGuiLayer::OnMouseScrolledEvent(MouseScrolledEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		io.AddMouseWheelEvent(e.GetXOffset(), e.GetYOffset());
-		return false;
-	}
-
-	bool ImGuiLayer::OnKeyPressdEvent(KeyPressedEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		ImGuiKey key = ImGui_ImplGlfw_KeyToImGuiKey(e.GetKeyCode(), 0);
-		io.AddKeyEvent(key, true); // True = Pressed 
-		return false;
-	}
-
-	bool ImGuiLayer::OnKeyReleasedEvent(KeyReleasedEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		ImGuiKey key = ImGui_ImplGlfw_KeyToImGuiKey(e.GetKeyCode(), 0);
-		io.AddKeyEvent(key, false);   // false = released 
-		return false;
-	}
-
-	bool ImGuiLayer::OnKeyTypeEvent(KeyTypedEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		io.AddInputCharacter((unsigned int)e.GetKeyCode());
-		return false;
-	}
-
-	bool ImGuiLayer::OnWindowResizeEvent(WindowResizeEvent& e)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		io.DisplaySize = ImVec2((float)e.GetWidth(), (float)e.GetHeight());
-		io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
-		return false;
+		ImGui::ShowDemoWindow(&show);
 	}
 
 	void ImGuiLayer::SetDarkThemeColors()
@@ -204,9 +149,8 @@ namespace Rise
 		colors[ImGuiCol_TabUnfocused] = ImVec4{ 0.09f, 0.09f, 0.09f, 1.00f };
 		colors[ImGuiCol_TabUnfocusedActive] = ImVec4{ 0.13f, 0.13f, 0.13f, 1.00f };
 
-		//// Docking (chỉ compile được khi build ImGui docking branch)
-		//colors[ImGuiCol_DockingPreview] = ImVec4{ 0.15f, 0.55f, 0.95f, 0.70f };
-		//colors[ImGuiCol_DockingEmptyBg] = ImVec4{ 0.08f, 0.08f, 0.08f, 1.00f };
+		colors[ImGuiCol_DockingPreview] = ImVec4{ 0.15f, 0.55f, 0.95f, 0.70f };
+		colors[ImGuiCol_DockingEmptyBg] = ImVec4{ 0.08f, 0.08f, 0.08f, 1.00f };
 
 		// Plot
 		colors[ImGuiCol_PlotLines] = ImVec4{ 0.61f, 0.61f, 0.61f, 1.00f };

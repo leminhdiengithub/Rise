@@ -23,6 +23,6 @@ namespace Rise
 
 	private:
 		std::vector<Layer*> m_Layers;
-		std::vector<Layer*>::iterator m_layerInsert;
+		unsigned int m_LayerInsertIndex = 0;
 	};
 }

@@ -19,7 +19,9 @@ IncludeDir ["glm"] = "Rise/vendor/glm"
 
 include "Rise/vendor/GLFW"
 include "Rise/vendor/Glad"
-include "Rise/vendor/imgui"
+-- include "Rise/vendor/imgui" removed: upstream ocornut/imgui (docking branch)
+-- has no premake5.lua, so ImGui can't build as its own project here.
+-- Instead, its source is unity-built via Rise/src/Rise/ImGui/ImGuiBuild.cpp.
 
 project "Rise"
     location "Rise"
@@ -55,7 +57,9 @@ project "Rise"
     {
 	    "GLFW",
         "Glad",
-        "ImGui",
+    -- "ImGui" removed: ImGui is no longer a separate premake project/lib.
+    -- Since switching to the docking branch (which has no premake5.lua of its own),
+    -- ImGui source is compiled directly into Rise via ImGuiBuild.cpp instead.
 	    "opengl32.lib",
 	    "dwmapi.lib"
     }
