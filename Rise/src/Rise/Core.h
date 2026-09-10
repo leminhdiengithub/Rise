@@ -1,15 +1,5 @@
 ﻿#pragma once
 
-#ifdef RS_PLATFORM_WINDOWS // Nếu đang chạy trên Windows
-	#ifdef RS_BUILD_DLL     // Nếu đang BUILD file DLL
-		#define RISE_API __declspec(dllexport)  // → Xuất ra (chỉ sử dụng khi SandBox gọi)
-	#else 
-		#define RISE_API __declspec(dllimport)   // → Nhập vào
-	#endif
-#else
-	#error Rise only support Window! // Không phải Windows → báo lỗi
-#endif
-
 #if RS_DEBUG
 	#define RS_ENABLE_ASSERTS
 #endif

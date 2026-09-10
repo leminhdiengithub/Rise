@@ -77,7 +77,7 @@ namespace Rise
 		}
 	}
 
-	void ImGuiLayer::OnImGuiRender()
+	void ImGuiLayer::OnImGuiRender() //control debug
 	{
 		static bool show = true;
 

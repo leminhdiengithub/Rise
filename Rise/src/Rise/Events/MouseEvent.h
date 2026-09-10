@@ -9,7 +9,7 @@ namespace Rise {
 	// Kích hoạt khi người dùng DI CHUYỂN chuột
 	// Lưu tọa độ X, Y của chuột trên màn hình
 	// =========================================================
-	class RISE_API MouseMovedEvent : public Event
+	class MouseMovedEvent : public Event
 	{
 	public:
 		// Constructor: nhận vào tọa độ x, y của chuột
@@ -50,7 +50,7 @@ namespace Rise {
 	// Kích hoạt khi người dùng CUỘN chuột (scroll wheel)
 	// Lưu offset X (cuộn ngang) và Y (cuộn dọc)
 	// =========================================================
-	class RISE_API MouseScrolledEvent : public Event
+	class MouseScrolledEvent : public Event
 	{
 	public:
 		// xOffset: cuộn ngang (shift + scroll)
@@ -87,7 +87,7 @@ namespace Rise {
 	// KHÔNG dùng trực tiếp → constructor để ở protected
 	// Không có EVENT_CLASS_TYPE vì đây là class trừu tượng
 	// =========================================================
-	class RISE_API MouseButtonEvent : public Event
+	class MouseButtonEvent : public Event
 	{
 	public:
 		// Trả về mã nút chuột được nhấn
@@ -114,7 +114,7 @@ namespace Rise {
 	// Kích hoạt khi người dùng NHẤN (press) nút chuột
 	// Kế thừa từ MouseButtonEvent
 	// =========================================================
-	class RISE_API MouseButtonPressedEvent : public MouseButtonEvent
+	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		// Gọi constructor của MouseButtonEvent để lưu button code
@@ -140,7 +140,7 @@ namespace Rise {
 	// Kích hoạt khi người dùng THẢ (release) nút chuột
 	// Kế thừa từ MouseButtonEvent
 	// =========================================================
-	class RISE_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
 		// Gọi constructor của MouseButtonEvent để lưu button code

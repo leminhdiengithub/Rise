@@ -7,7 +7,7 @@
 
 namespace Rise
 {
-	class RISE_API LayerStack
+	class LayerStack
 	{
 	public:
 		LayerStack();

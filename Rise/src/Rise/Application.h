@@ -12,7 +12,7 @@
 
 namespace Rise
 {
-	class  RISE_API Application
+	class Application
 	{
 	public:
 		Application();

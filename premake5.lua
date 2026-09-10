@@ -25,9 +25,9 @@ include "Rise/vendor/Glad"
 
 project "Rise"
     location "Rise"
-    kind "SharedLib"
+    kind "StaticLib"
     language "C++"
-    staticruntime "Off"
+    staticruntime "On"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -66,21 +66,15 @@ project "Rise"
 
     filter "system:windows"
         cppdialect "C++17"     
-        staticruntime "Off"
+        staticruntime "On"
         systemversion "latest"
         buildoptions { "/utf-8" }
 
         defines
         {
             "RS_PLATFORM_WINDOWS",
-            "RS_BUILD_DLL",
             "GLFW_INCLUDE_NONE",
             "IMGUI_IMPL_OPENGL_LOADER_CUSTOM"
-        }
-
-        postbuildcommands
-        {
-            ("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"") 
         }
 
     filter "configurations:Debug"
@@ -102,7 +96,7 @@ project "Sandbox"
     location "Sandbox"      
     kind "ConsoleApp"
     language "C++"
-    staticruntime "Off"
+    staticruntime "On"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")   
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")  
@@ -127,7 +121,7 @@ project "Sandbox"
 
     filter "system:windows"
         cppdialect "C++17"     
-        staticruntime "Off"
+        staticruntime "On"
         systemversion "latest"
         buildoptions { "/utf-8" }
 
