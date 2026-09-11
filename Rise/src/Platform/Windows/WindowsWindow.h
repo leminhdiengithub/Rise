@@ -4,6 +4,8 @@
 
 #include <GLFW/glfw3.h>
 
+#include"Rise/Renderer/GraphicsContext.h"
+
 namespace Rise {
 
 	class WindowsWindow : public Window
@@ -28,6 +30,7 @@ namespace Rise {
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window = nullptr;
+		std::unique_ptr<GraphicsContext> m_Context;
 
 		struct WindowData
 		{
